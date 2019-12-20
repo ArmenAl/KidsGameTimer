@@ -27,11 +27,13 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Activi
         public ImageView mDeleteImage;
         public TextView mTextView1;
         public TextView mTextView2;
+        public TextView mTimeView;
 
         public ActivityViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             mTextView1 = itemView.findViewById(R.id.itemHeading);
             mTextView2 = itemView.findViewById(R.id.itemDescription);
+            mTimeView = itemView.findViewById(R.id.itemTimer);
             mDeleteImage = itemView.findViewById(R.id.imageDelete);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +80,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Activi
         //holder.mDeleteImage.setImageResource(currentItem.getImageResource());
         holder.mTextView1.setText(currentItem.getText1());
         holder.mTextView2.setText(currentItem.getText2());
+        holder.mTimeView.setText(currentItem.getTime());
     }
 
     @Override
