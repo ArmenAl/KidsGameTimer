@@ -1,5 +1,7 @@
 package com.example.kidsgametimer;
 
+import static android.graphics.Color.rgb;
+
 public class ActivityItem {
     private int mImageResource;
     private String mText1;
@@ -13,8 +15,9 @@ public class ActivityItem {
         mTime = time;
     }
 
-    public void changeText1(String text){
-        mText1 = text;
+    public void changeText1Text2(String text1, String text2) {
+        mText1 = text1;
+        mText2 = text2;
     }
 
     public int getImageResource() {
