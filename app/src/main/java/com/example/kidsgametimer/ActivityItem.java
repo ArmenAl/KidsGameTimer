@@ -1,18 +1,18 @@
 package com.example.kidsgametimer;
 
-import static android.graphics.Color.rgb;
-
 public class ActivityItem {
     private int mImageResource;
     private String mText1;
     private String mText2;
-    private String mTime;
+    private String mTimeText;
+    private long mTimer;
 
-    public ActivityItem(int imageDeleteResource, String text1, String text2, String time) {
+    public ActivityItem(int imageDeleteResource, String text1, String text2, String timerText, long timer) {
         mImageResource = imageDeleteResource;
         mText1 = text1;
         mText2 = text2;
-        mTime = time;
+        mTimeText = timerText;
+        mTimer = timer;
     }
 
     public void changeText1Text2(String text1, String text2) {
@@ -32,8 +32,12 @@ public class ActivityItem {
         return mText2;
     }
 
-    public String getTime() {
-        return mTime;
+    public String getmTimerText() {
+        return getmTimerText();
+    }
+
+    public long getmTimer() {
+        return mTimer;
     }
 
 }

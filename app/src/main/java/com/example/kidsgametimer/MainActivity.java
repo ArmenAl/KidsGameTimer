@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,8 +18,6 @@ import android.widget.Toast;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
-import static android.graphics.Color.rgb;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
@@ -37,12 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageView buttonAddTime;
     private ImageView buttonRemoveTime;
-    private Button buttonResetTime;
+    private ImageView buttonResetTime;
     private EditText timerToSet;
     private TextView timerActiv;
 
     LocalTime setsTime = LocalTime.of(00, 10, 000);
-    private int counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +47,14 @@ public class MainActivity extends AppCompatActivity {
 
         createExampleList();
         buildRecyclerView();
-
         setButtons();
+
     }
 
-    public void insertItem(int position, String insertedName, String insertTime) {
-        mActivityList.add(new ActivityItem(R.id.imageDelete, insertedName, "Is playing now.", insertTime));
+    // Inserts item to recyclerview
+    public void insertItem(int position, String insertedName, String insertedTime, long totSeconds) {
+
+        mActivityList.add(new ActivityItem(R.id.imageDelete, insertedName, "Is playing now.", insertedTime, totSeconds));
         mAdapter.notifyItemInserted(mActivityList.size() - 1);
     }
 
@@ -67,15 +65,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeItem(int position, String text1, String text2) {
         mActivityList.get(position).changeText1Text2(text1, text2);
-
         mAdapter.notifyItemChanged(position);
     }
 
     public void createExampleList() {
         mActivityList = new ArrayList<>();
-        mActivityList.add(new ActivityItem(R.id.imageDelete, "Test1", "Is playing now.", "00:00:00"));
-        mActivityList.add(new ActivityItem(R.id.imageDelete, "Test3", "Is playing now.", "00:00:00"));
-        mActivityList.add(new ActivityItem(R.id.imageDelete, "Test5", "Is playing now.", "00:00:00"));
+        mActivityList.add(new ActivityItem(R.id.imageDelete, "Test1", "Is playing now.", "00:00:00", 0));
+        mActivityList.add(new ActivityItem(R.id.imageDelete, "Test3", "Is playing now.", "00:00:00", 0));
+        mActivityList.add(new ActivityItem(R.id.imageDelete, "Test5", "Is playing now.", "00:00:00", 0));
     }
 
     public void buildRecyclerView() {
@@ -110,41 +107,41 @@ public class MainActivity extends AppCompatActivity {
         buttonAddTime = findViewById(R.id.addTimeButton);
         buttonRemoveTime = findViewById(R.id.removeTimeButton);
         buttonResetTime = findViewById(R.id.resetButton);
-        timerActiv = findViewById(R.id.itemTimer);
+        timerActiv = findViewById(R.id.itemTimerView);
 
 
-        // Adds name and time to list
+        // Adds name and time, and starts the timer
         buttonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String insertedName = editTextInsert.getText().toString();
 
+                String insertedName = editTextInsert.getText().toString();
                 LocalTime insertTime = LocalTime.parse(timeInsert.getText().toString());
 
                 if (insertedName.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Enter Name!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Enter A Name!", Toast.LENGTH_SHORT).show();
                 } else {
                     try {
-                        insertItem(mActivityList.size(), insertedName, insertTime.format(DateTimeFormatter.ISO_TIME));
-                        editTextInsert.setText("");
+                        long hours = insertTime.getHour();
+                        long minutes = insertTime.getMinute();
+                        long totSeconds = (hours * 60 * 60 * 1000) + (minutes * 60 * 1000);
 
+                        insertItem(mActivityList.size(), insertedName, insertTime.format(DateTimeFormatter.ISO_TIME), totSeconds);
+                        editTextInsert.setText("");
                         buttonResetTime.callOnClick();
                     } catch (NumberFormatException e) {
 
                     }
                 }
-
             }
         });
 
         // Adds time to timer
         buttonAddTime.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 setsTime = setsTime.plusMinutes(1);
                 timerToSet.setText(setsTime.format(DateTimeFormatter.ISO_TIME));
-
                 Toast.makeText(getApplicationContext(), "1 Minute Added!", Toast.LENGTH_SHORT).show();
             }
         });
