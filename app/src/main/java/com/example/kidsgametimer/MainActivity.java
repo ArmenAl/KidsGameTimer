@@ -2,6 +2,9 @@ package com.example.kidsgametimer;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,10 +21,15 @@ import android.widget.Toast;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
+
+    //private UserViewModel userViewModel;
+
     private ArrayList<ActivityItem> mActivityList;
+    //private List<User> mActivityList;
 
     private RecyclerView mRecyclerView;
     private ActivityAdapter mAdapter;
@@ -38,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText timerToSet;
     private TextView timerActiv;
 
-    LocalTime setsTime = LocalTime.of(00, 10, 000);
+    LocalTime setsTime = LocalTime.of(00, 00, 000);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     public void insertItem(int position, String insertedName, String insertedTime, long totSeconds) {
 
         mActivityList.add(new ActivityItem(R.id.imageDelete, insertedName, "Is playing now.", insertedTime, totSeconds));
+        //mActivityList.add(new User(insertedName, totSeconds));
         mAdapter.notifyItemInserted(mActivityList.size() - 1);
     }
 
@@ -80,9 +89,21 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new ActivityAdapter(mActivityList);
+        //mAdapter = new ActivityAdapter(mActivityList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        /*userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        userViewModel.getAllUsers().observe(this, new Observer<List<User>>() {
+            @Override
+            public void onChanged(List<User> users) {
+                // update recyclerview
+                //mAdapter.setUsers(users);
+                Toast.makeText(MainActivity.this,"Not changed", Toast.LENGTH_SHORT);
+            }
+        });
+        */
 
         mAdapter.setOnItemClickListener(new ActivityAdapter.OnItemClickListener() {
             @Override

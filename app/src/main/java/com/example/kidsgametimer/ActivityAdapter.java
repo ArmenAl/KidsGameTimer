@@ -13,12 +13,14 @@ import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ActivityViewHolder> {
     private ArrayList<ActivityItem> mActivityItemList;
+    //private List<User> mActivityItemList;
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
@@ -74,8 +76,9 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Activi
         }
     }
 
+    //public ActivityAdapter(List<User> activityItemList) {
     public ActivityAdapter(ArrayList<ActivityItem> activityItemList) {
-        mActivityItemList = activityItemList;
+            mActivityItemList = activityItemList;
     }
 
     @Override
@@ -88,8 +91,10 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Activi
     @Override
     public void onBindViewHolder(final ActivityViewHolder holder, int position) {
         ActivityItem currentItem = mActivityItemList.get(position);
+        //User currentItem = mActivityItemList.get(position);
 
         holder.mTextView1.setText(currentItem.getText1());
+        //holder.mTextView1.setText(currentItem.getUserName());
         holder.mTextView2.setText(currentItem.getText2());
 
         holder.mTimeView.setText("" + currentItem.getmTimer());
@@ -98,8 +103,9 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Activi
         if (holder.timer != null) {
             holder.timer.cancel();
         }
-        final long itemTimer = Long.parseLong("" + currentItem.getmTimer());
 
+        final long itemTimer = Long.parseLong("" + currentItem.getmTimer());
+        //final long itemTimer = Long.parseLong("" + currentItem.getUserTime());
         holder.timer = new CountDownTimer(itemTimer, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -107,15 +113,15 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Activi
                 if (millisUntilFinished <= 60000) {
                     holder.mCardBackground.setCardBackgroundColor(Color.parseColor("#FFFFD740"));
                 }
-                    long seconds = (millisUntilFinished / 1000);
-                    long minutes = (seconds / 60);
-                    long hours = (minutes / 60);
+                long seconds = (millisUntilFinished / 1000);
+                long minutes = (seconds / 60);
+                long hours = (minutes / 60);
 
-                    String hour = String.format("%02d:", hours % 24);
-                    String minute = String.format("%02d:", minutes % 60);
-                    String second = String.format("%02d", seconds % 60);
+                String hour = String.format("%02d:", hours % 24);
+                String minute = String.format("%02d:", minutes % 60);
+                String second = String.format("%02d", seconds % 60);
 
-                    String time = hour + minute + second;
+                String time = hour + minute + second;
 
                 holder.mTimeView.setText(time);
             }
@@ -131,4 +137,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Activi
     public int getItemCount() {
         return mActivityItemList.size();
     }
+
+    /*public void setUsers(List<User> activityItems) {
+        this.mActivityItemList = activityItems;
+    }*/
 }

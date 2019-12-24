@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#676565"
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="0dp">
+
+
+    <EditText
+        android:id="@+id/timerView"
+        android:layout_width="198dp"
+        android:layout_height="92dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#2b2727"
+        android:editable="false"
+        android:ems="10"
+        android:maxLength="5"
+        android:text="00:10:000"
+        android:textAlignment="center"
+        android:textColor="#FFD740"
+        android:textSize="70sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hourLabel" />
+
+    <TextView
+        android:id="@+id/hourLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:text="Hour"
+        android:textColor="#E2E2E2"
+        android:textColorHighlight="#C1F7F6F6"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/minuteLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="8dp"
+        android:text="Minute"
+        android:textColor="#E2E2E2"
+        android:textColorHighlight="#C1F7F6F6"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/hourLabel"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/addTimeButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="35dp"
+        android:background="#2b2727"
+        android:src="@drawable/ic_add_gray"
+        android:textAlignment="center"
+        android:textColor="#E2E2E2"
+        android:textColorHighlight="#C1F7F6F6"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/timerView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/removeTimeButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="86dp"
+        android:background="#2b2727"
+        android:src="@drawable/ic_remove_gray"
+        android:textAlignment="center"
+        android:textColor="#E2E2E2"
+        android:textColorHighlight="#C1F7F6F6"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/timerView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/settingsButton"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:background="	#2b2727"
+        android:onClick="goToSettings"
+        android:src="@drawable/ic_settings_gray"
+        android:textColor="#E2E2E2"
+        android:textColorHighlight="#E2E2E2"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timerView" />
+
+    <ImageView
+        android:id="@+id/resetButton"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="8dp"
+        android:background="	#2b2727"
+        android:src="@drawable/ic_restore_gray"
+        android:text=""
+        android:textColor="#E2E2E2"
+        android:textColorHighlight="#E2E2E2"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/settingsButton"
+        app:layout_constraintTop_toBottomOf="@+id/timerView" />
+
+    <Button
+        android:id="@+id/addUserButton"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#2b2727"
+        android:text="Add Kid"
+        android:textColor="#E2E2E2"
+        android:textColorHighlight="#C1F7F6F6"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/editName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsButton" />
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:background="#2b2727"
+        android:ems="10"
+        android:hint="Enter Name"
+        android:maxLength="15"
+        android:textAlignment="center"
+        android:textColor="#E2E2E2"
+        android:textColorHint="#E2E2E2"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/addUserButton"
+        app:layout_constraintTop_toBottomOf="@+id/resetButton" />
+
+    <TextView
+        android:id="@+id/ActivityListLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Activity List"
+        android:textAlignment="center"
+        android:textColor="#E2E2E2"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/activity_recyclerview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editName"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
